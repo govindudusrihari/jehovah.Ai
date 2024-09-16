@@ -1,0 +1,33 @@
+pip install requests pdfkit
+import requests
+import pdfkit
+def get_pdf_url(llm_api_key, prompt):
+    # Replace with your LLM API endpoint and parameters
+    url = "https://your-llm-api.com/generate_pdf"
+    headers = {"Authorization": f"Bearer {llm_api_key}"}
+    payload = {"prompt": prompt}
+
+    response = requests.post(url, headers=headers, json=payload)
+    if response.status_code == 200:
+        return response.json()["pdf_url"]
+    else:
+        raise Exception("Failed to get PDF URL")
+def download_pdf(pdf_url, filename):
+    response = requests.get(pdf_url)
+    if response.status_code == 200:
+        with open(filename, "wb") as f:
+            f.write(response.content)
+        print("PDF downloaded successfully!")
+    else:   
+
+        raise Exception("Failed to download PDF")
+def main():
+    llm_api_key = "YOUR_LLM_API_KEY"  # Replace with your actual API key
+    prompt = input("Enter your prompt: ")
+
+    pdf_url = get_pdf_url(llm_api_key, prompt)
+    filename = "output.pdf"
+    download_pdf(pdf_url, filename)
+
+if __name__ == "__main__":
+    main()
