@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My LLM Chatbot</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #chat-box {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      width: 400px;
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin-bottom: 1rem;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .user {
+      background-color: #eee;
+      text-align: right;
+    }
+
+    .bot {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My LLM Chatbot</h1>
+    <div id="chat-box">
+      <!-- Messages will appear here -->
+    </div>
+    <input type="text" id="user-input" placeholder="Type your message here...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    // Placeholder for your LLM integration
+    function getResponse(message) {
+      // Replace with your actual LLM API call
+      return "This is a sample response. Your LLM would generate text here."; 
+    }
+
+    function sendMessage() {
+      const userInput = document.getElementById("user-input").value;
+      if (userInput) {
+        displayMessage(userInput, "user");
+        document.getElementById("user-input").value = "";
+
+        // Call your LLM here to get the response
+        const response = getResponse(userInput);
+        displayMessage(response, "bot");
+      }
+    }
+
+    function displayMessage(message, sender) {
+      const chatBox = document.getElementById("chat-box");
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message", sender);
+      messageElement.textContent = message;
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
